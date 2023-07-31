@@ -1,4 +1,5 @@
 from pwn import *
+import random
 
 board = [['_', '_', '_', '_', '_', '_', '_', '_', '_'],
          ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
@@ -179,3 +180,24 @@ def open_all():
                     move = i+','+j # type: ignore
                     move = str(move).encode('ascii')
                     sh.sendline(move)
+
+def random_open():
+    global flag_board
+    global board
+    counter = 0
+    a = int(input('random? : (1 for yes)'))
+    if a == 1:
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == "_":
+                    if flag_board[i][j] == '_':
+                        counter+=1
+    selector = random.randint(0, counter)
+    counter = 0
+    for i in range(9):
+        for j in range(9):
+            counter+=1
+            if counter == selector:
+                move = i+','+j # type: ignore
+                move = str(move).encode('ascii')
+                sh.sendline(move)

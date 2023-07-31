@@ -1,5 +1,6 @@
 from pwn import *
-from algorithm import *
+from algo_new import *
+import random
 
 board = [['_', '_', '_', '_', '_', '_', '_', '_', '_'],
          ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
@@ -10,6 +11,8 @@ board = [['_', '_', '_', '_', '_', '_', '_', '_', '_'],
          ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
          ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
          ['_', '_', '_', '_', '_', '_', '_', '_', '_']]
+
+flag_board = board.copy()
 
 def isMatch(message, match):
 	if (match in message):
@@ -73,15 +76,3 @@ def printBoard():
 #printBoard()
 
 # Driver
-sh = process('./minesweeper')
-editBoard()
-print(remainingSpaces(board))
-#printBoard()
-sh.sendline(b'1,1')
-editBoard()
-print(remainingSpaces(board))
-#printBoard()
-sh.sendline(b'2,2')
-editBoard()
-print(remainingSpaces(board))
-#printBoard()
